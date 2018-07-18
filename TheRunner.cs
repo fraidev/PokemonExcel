@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ganss.Excel;
 using PokemonExcel.Domain;
 using Serilog;
@@ -27,6 +28,7 @@ namespace PokemonExcel
 
             //Create or access an excel file
             System.IO.Directory.CreateDirectory(pathString);
+            //pokemons.xlsx
             const string fileExcelName = "pokemons.xlsx";
             pathString = System.IO.Path.Combine(pathString, fileExcelName);
 

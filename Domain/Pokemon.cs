@@ -7,11 +7,16 @@ namespace PokemonExcel.Domain
 {
     public class Pokemon
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private int Weight { get; set; }
-        private int Height { get; set; }
-        private int Base_Experience { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("weight")]
+        public int Weight { get; set; }
+        [JsonProperty("height")]
+        public int Height { get; set; }
+        [JsonProperty("base_experience")]
+        public int BaseExperience { get; set; }
         
         public static List<Pokemon> GetPokemonsList(int pokemonsCount){
     
@@ -29,7 +34,7 @@ namespace PokemonExcel.Domain
                 
                 pokemonsList.Add(JsonConvert.DeserializeObject<Pokemon>(content));
                 Log.Information("Pokemon {pokemon} added", pokemonsList[i-1].Name);
-            }    
+            }
             return pokemonsList;
         }
     }
