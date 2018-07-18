@@ -33,7 +33,7 @@ namespace PokemonExcel.Domain
                 var content = response.Content; // raw content as string
                 
                 pokemonsList.Add(JsonConvert.DeserializeObject<Pokemon>(content));
-                Log.Information("Pokemon {pokemon} added", pokemonsList[i-1].Name);
+                Log.Information("Pokemon {pokemon} added {i}/{pokemonsCount}", pokemonsList[i-1].Name, i, pokemonsCount);
             }
             return pokemonsList;
         }
