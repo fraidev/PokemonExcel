@@ -40,8 +40,8 @@
       <HintPath>packages\ExcelMapper.1.0.15\lib\net40\ExcelMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentExcel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\FluentExcel.2.2.0\lib\netstandard2.0\FluentExcel.dll</HintPath>
+    <Reference Include="FluentExcel, Version=1.2.2.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\FluentExcel.1.2.2\lib\net45\FluentExcel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -201,7 +201,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ExcelMapperExtractor.cs" />
     <Compile Include="Domain\FluentExcelExtractor.cs" />
+    <Compile Include="Domain\IExcelExtractor.cs" />
     <Compile Include="Domain\Pokemon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

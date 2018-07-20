@@ -1,21 +1,13 @@
 ﻿using System.Collections.Generic;
 using FluentExcel;
-using Ganss.Excel;
 using Serilog;
 
 namespace PokemonExcel.Domain
 {
-    public class FluentExcelExtractor:Pokemon
+    public class FluentExcelExtractor:IExcelExtractor
     {
-        //ExcelMapper
-        private static void ExcelExtractorByExcelMapper(string pathString, IEnumerable<Pokemon> pokemons)
-        {
-            new ExcelMapper().Save(pathString, pokemons, "Pokemons");
-            Log.Information("Successful importing in excel");
-        }
-        
         //FluentExcel
-        private static void ExcelExtractorByFluentExcel(string pathString, IEnumerable<Pokemon> pokemons)
+        protected static void ExcelExtractorByFluentExcel(string pathString, IEnumerable<Pokemon> pokemons)
         {
             var fc = Excel.Setting.For<Pokemon>();
             fc.Property(r => r.Id)
@@ -42,17 +34,14 @@ namespace PokemonExcel.Domain
             Log.Information("Successful importing in excel");
         }
 
-        protected static void PokemonExcelExtractor(string lib,string pathString, IEnumerable<Pokemon> pokemons)
+        public static void PokemonExcelExtractor(string pathString, IEnumerable<Pokemon> pokemons)
         {
-            switch (lib)
-            {
-                case "ExcelMapper":
-                    ExcelExtractorByExcelMapper(pathString, pokemons);
-                    break;
-                case "FluentExcel":
-                    ExcelExtractorByFluentExcel(pathString, pokemons);
-                    break;
-            }
+            ExcelExtractorByFluentExcel(pathString, pokemons);
+        }
+
+        void IExcelExtractor.PokemonExcelExtractor(string pathString, IEnumerable<Pokemon> pokemons)
+        {
+            PokemonExcelExtractor(pathString, pokemons);
         }
     }
 }

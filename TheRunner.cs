@@ -9,7 +9,7 @@ using NPOI.SS.Extractor;
 
 namespace PokemonExcel
 {
-    public class TheRunner: FluentExcelExtractor
+    public class TheRunner
     {
         [Verb]
         public static void Run(
@@ -37,15 +37,33 @@ namespace PokemonExcel
 
             if (!System.IO.File.Exists(pathString))
             {
-                PokemonExcelExtractor(lib, pathString, pokemons);
+                WhitchLib(lib, pathString, pokemons);
             }
             else
             {
                 System.IO.File.Delete(pathString);
                 Log.Information("Deleted old excel file");
-                PokemonExcelExtractor(lib, pathString, pokemons);
+                WhitchLib(lib, pathString, pokemons);
+                
             }
             Console.ReadLine();
+        }
+
+        private static void WhitchLib(string lib, string pathString, IEnumerable<Pokemon> pokemons)
+        {
+            switch (lib)
+            {
+                case "FluentExcel":
+                {
+                    FluentExcelExtractor.PokemonExcelExtractor(pathString, pokemons);
+                    break;
+                }
+                case "ExcelMapper":
+                {
+                    ExcelMapperExtractor.PokemonExcelExtractor(pathString, pokemons);
+                    break;
+                }
+            }
         }
     }
 }
