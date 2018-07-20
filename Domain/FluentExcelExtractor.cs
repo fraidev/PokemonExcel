@@ -4,10 +4,13 @@ using Serilog;
 
 namespace PokemonExcel.Domain
 {
+    
     public class FluentExcelExtractor:IExcelExtractor
     {
         //FluentExcel
-        protected static void ExcelExtractorByFluentExcel(string pathString, IEnumerable<Pokemon> pokemons)
+        public string LibName => "FluentExcel";
+
+        public void Extract(string pathString, IEnumerable<Pokemon> pokemons)
         {
             var fc = Excel.Setting.For<Pokemon>();
             fc.Property(r => r.Id)
@@ -33,15 +36,6 @@ namespace PokemonExcel.Domain
             pokemons.ToExcel(pathString);
             Log.Information("Successful importing in excel");
         }
-
-        public static void PokemonExcelExtractor(string pathString, IEnumerable<Pokemon> pokemons)
-        {
-            ExcelExtractorByFluentExcel(pathString, pokemons);
-        }
-
-        void IExcelExtractor.PokemonExcelExtractor(string pathString, IEnumerable<Pokemon> pokemons)
-        {
-            PokemonExcelExtractor(pathString, pokemons);
-        }
+        
     }
 }

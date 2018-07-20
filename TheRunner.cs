@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Ganss.Excel;
 using PokemonExcel.Domain;
 using Serilog;
 using CLAP;
 using NPOI.SS.Extractor;
+using IExcelExtractor = NPOI.SS.Extractor.IExcelExtractor;
 
 namespace PokemonExcel
 {
@@ -51,17 +53,18 @@ namespace PokemonExcel
 
         private static void WhitchLib(string lib, string pathString, IEnumerable<Pokemon> pokemons)
         {
-            switch (lib)
+            var extractors = new List<Domain.IExcelExtractor>
             {
-                case "FluentExcel":
+                new FluentExcelExtractor(),
+                new ExcelMapperExtractor()
+            };
+
+
+            foreach (var extractor in extractors)
+            {
+                if (extractor.LibName == lib)
                 {
-                    FluentExcelExtractor.PokemonExcelExtractor(pathString, pokemons);
-                    break;
-                }
-                case "ExcelMapper":
-                {
-                    ExcelMapperExtractor.PokemonExcelExtractor(pathString, pokemons);
-                    break;
+                    extractor.Extract(pathString, pokemons);
                 }
             }
         }
