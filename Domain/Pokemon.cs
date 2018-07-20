@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RestSharp;
 using Serilog;
+using Ganss.Excel;
 
 namespace PokemonExcel.Domain
 {
