@@ -13,6 +13,7 @@ namespace PokemonExcel.Domain
             new ExcelMapper().Save(pathString, pokemons, "Pokemons");
             Log.Information("Successful importing in excel");
         }
+        
         //FluentExcel
         private static void ExcelExtractorByFluentExcel(string pathString, IEnumerable<Pokemon> pokemons)
         {
